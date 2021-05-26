@@ -18,7 +18,7 @@ def generate_message_http(domain, request, res, origin, date):
 Interaction HTTP Detected!
 ==========================
 > Domain:   `{domain}`
-> Request:  
+> Request:
 `{base64.b64decode(request).decode("utf-8")}`
 > Response:
 `{base64.b64decode(res).decode("utf-8")}`
@@ -62,18 +62,18 @@ def check(burp_token, user_id, token):
 	except:
 		pass
 
-def main(btoken, chat_id, bot_token):
-	
+def main(biid, chat_id, bot_token):
+
 	while True:
 		time.sleep(2)
-		check(btoken, chat_id, bot_token)
+		check(biid, chat_id, bot_token)
 
 if __name__ == '__main__':
 
 	print(banner)
 	parser = argparse.ArgumentParser(add_help=True)
-	parser.add_argument("-bt", "--btoken", required=True, help="Token Burp")
-	parser.add_argument("-cid", "--chad_id", required=True, help="Chat Id of Telegram")
-	parser.add_argument("-bot", "--bot_token", required=True, help="Token of Bot")
+	parser.add_argument("-b", "--biid", required=True, help="Token Burp")
+	parser.add_argument("-c", "--chat_id", required=True, help="Chat Id of Telegram")
+	parser.add_argument("-t", "--bot_token", required=True, help="Token of Bot")
 	args = parser.parse_args()
-	main(args.btoken, args.chat_id, args.bot_token)
+	main(args.biid, args.chat_id, args.bot_token)

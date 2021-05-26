@@ -15,7 +15,7 @@ pip3 install requests
 * Get Burp Collaborator polling request URL and link IDs (https://www.onsecurity.io/blog/persistent-access-to-burp-suite-sessions-step-by-step-guide/).
  
 ```
-python3 bc2telegram.py --btoken abcdef... --chad_id 123456789 --bot_token 123456789:AAA...
+python3 bc2telegram.py --biid abcdef... --chad_id 123456789 --bot_token 123456789:AAA...
 ```
 
 # Telegram messages example
