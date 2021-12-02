@@ -74,7 +74,7 @@ def check(burp_token, user_id, token, output):
 				domain = x["interactionString"]+".burpcollaborator.net"
 				subdomain = x["data"]["subDomain"]
 				origin = x["client"]
-				date = int(x["time"])
+				date = get_date(int(x["time"]))
 				send_message(user_id, token, generate_message_dns(domain, subdomain, origin,date))
 				logs(generate_message_dns(domain, subdomain, origin,date),output)
 
