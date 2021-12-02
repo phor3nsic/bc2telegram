@@ -21,6 +21,13 @@ def get_date(time):
 	date_request = date_request.replace(" -03","")
 	return(date_request)
 
+def check_black_list(ip):
+	black_list = open("blacklist.txt").readlines()
+	if ip in black_list:
+		return False
+	else:
+		return True
+
 def generate_message_http(domain, request, res, origin, date):
 	message = f"""
 Interaction HTTP Detected!
@@ -67,16 +74,19 @@ def check(burp_token, user_id, token, output):
 				request = x["data"]["request"].encode('ascii')
 				res = x["data"]["response"].encode('ascii')
 				origin = x["client"]
-				date = get_date(int(x["time"]))
-				send_message(user_id, token, generate_message_http(domain, request, res, origin,date))
-				logs(generate_message_http(domain, request, res, origin,date),output)
+				if check_black_list(origin) == True:
+					date = get_date(int(x["time"]))
+					send_message(user_id, token, generate_message_http(domain, request, res, origin,date))
+					logs(generate_message_http(domain, request, res, origin,date),output)
+
 			if protocol == "dns":
 				domain = x["interactionString"]+".burpcollaborator.net"
 				subdomain = x["data"]["subDomain"]
 				origin = x["client"]
-				date = get_date(int(x["time"]))
-				send_message(user_id, token, generate_message_dns(domain, subdomain, origin,date))
-				logs(generate_message_dns(domain, subdomain, origin,date),output)
+				if check_black_list(origin) == True:
+					date = get_date(int(x["time"]))
+					send_message(user_id, token, generate_message_dns(domain, subdomain, origin,date))
+					logs(generate_message_dns(domain, subdomain, origin,date),output)
 
 
 def main(biid, chat_id, bot_token, output):
