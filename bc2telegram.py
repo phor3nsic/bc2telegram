@@ -31,7 +31,7 @@ Interaction HTTP Detected!
 > Response:
 `{base64.b64decode(res).decode("utf-8")}`
 > Origin: `{origin}`
-> Date: `{time.strftime("%H:%M %D", time.localtime(date))}`
+> Date: `{date}`
 """
 	return message
 
@@ -42,7 +42,7 @@ Interaction DNS Detected!
 > Domain:   `{domain}`
 > Subdomain: `{subdomain}`
 > Origin: `{origin}`
-> Date: `{time.strftime("%H:%M %D", time.localtime(date))}`
+> Date: `{date}`
 """
 	return message
 
