@@ -19,7 +19,7 @@ def send_message(user_id, token, message):
 	requests.get(url+f"bot{token}/sendMessage?chat_id={user_id}&text={message}&parse_mode=markdown")
 
 def get_date(time):
-	date_request = os.popen(f"echo {time} | date").read()
+	date_request = os.popen(f"echo {time} | TZ=\"America/Sao_Paulo\" date").read()
 	date_request = date_request.replace(" -03","")
 	return(date_request)
 
@@ -65,8 +65,11 @@ def check(burp_token, user_id, token, output, polling):
 	burp_token = burp_token.replace("+","%2b")
 	burp_token = burp_token.replace("=","%3d")
 	url = f"{polling}/burpresults?biid={burp_token}"
-	req = requests.get(url)
-	resp = req.json()
+	try:
+		req = requests.get(url)
+		resp = req.json()
+	except:
+		req.text = "{}"
 	
 	if req.text != "{}":
 		response = resp["responses"]
@@ -100,7 +103,7 @@ def main(biid, chat_id, bot_token, output, polling):
 	try:
 		while True:
 			check(biid, chat_id, bot_token, output, polling)
-			time.sleep(4)
+			time.sleep(5)
 	except KeyboardInterrupt:
 		sys.exit()
 
