@@ -18,6 +18,10 @@ pip3 install requests
 python3 bc2telegram.py --biid abcdef... --chad_id 123456789 --bot_token 123456789:AAA... -l log.txt
 ```
 
+# Blacklist
+
+If you want to block alert for some ips eg cloudflare just get source domain and save in blacklist.txt file.
+
 # Telegram messages example
 
 > DNS
